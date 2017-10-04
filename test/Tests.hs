@@ -36,6 +36,8 @@ prop_utcMrKeySort ds = sortBy (comparing fst) ds' == sortBy (comparing snd) ds'
 instance Arbitrary DiffTime where
   arbitrary = secondsToDiffTime `fmap` arbitrary
 
+instance Arbitrary Day where
+  arbitrary = ModifiedJulianDay `fmap` arbitrary
 
-$(derives [makeArbitrary] [''UTCTime, ''Day])
-
+instance Arbitrary UTCTime where
+  arbitrary = UTCTime <$> arbitrary <*> arbitrary
